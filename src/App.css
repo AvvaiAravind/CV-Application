@@ -20,6 +20,7 @@
 .header-section button {
   background-color: transparent;
   border: none;
+  outline: none;
 }
 
 .user-input-sect form .input-field {
@@ -98,11 +99,11 @@ input {
 .educational-section .degree {
   grid-column: 2 / 3;
 }
-.educational-section .endDate {
+.educational-section .endDateEducational {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
 }
-.educational-section .startDate {
+.educational-section .startDateEducational {
   grid-column: 1 / 2;
 }
 
@@ -120,11 +121,11 @@ input {
 .professional-section .position {
   grid-column: 2 / 3;
 }
-.professional-section .endDate {
+.professional-section .endDateProfessional {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
 }
-.professional-section .startDate {
+.professional-section .startDateProfessional {
   grid-column: 1 / 2;
 }
 .professional-section .companyName {

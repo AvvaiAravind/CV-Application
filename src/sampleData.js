@@ -25,11 +25,11 @@ export const educational = [
     value: "M.Sc in Computer Science",
   },
   {
-    id: "startDate",
+    id: "startDateEducational",
     label: "Start Date",
     value: "12 / 2020",
   },
-  { id: "endDate", label: "End Date", value: "12/ 2023" },
+  { id: "endDateEducational", label: "End Date", value: "12/ 2023" },
   {
     id: "location",
     label: "Location",
@@ -49,12 +49,12 @@ export const professional = [
     value: "Frontend Developer",
   },
   {
-    id: "startDate",
+    id: "startDateProfessional",
     label: "Start Date",
     value: "12 / 2020",
   },
   {
-    id: "endDate",
+    id: "endDateProfessional",
     label: "End Date",
     value: "12/ 2023",
   },

@@ -5,7 +5,8 @@ import {
   professional as initialProfessional,
   educational as initialEducational,
 } from "./sampleData";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+// import { SiBillboard } from "react-icons/si";
 
 export function App() {
   return <Body />;
@@ -13,7 +14,9 @@ export function App() {
 
 function Body() {
   const [personal, setPersonal] = useState(initialPersonal);
+
   const [professional, setProfessioanal] = useState(initialProfessional);
+
   const [educational, setEducational] = useState(initialEducational);
 
   function handleChange(e) {
@@ -42,8 +45,11 @@ function Body() {
     }
   }
   function handleSave(e) {
-    const parent = e.target..
+    const id = e.target.id;
 
+    if (id === "Personal-save") {
+      sessionStorage.setItem("personal", JSON.stringify(personal));
+    }
   }
 
   return (
@@ -71,8 +77,8 @@ function Body() {
       <div className="resume-section">
         <Resume
           personal={personal}
-          professional={professional}
           educational={educational}
+          professional={professional}
         />
       </div>
     </>
@@ -80,32 +86,56 @@ function Body() {
 }
 
 function UserInputSection({ title, section, onChange, onClick }) {
+  const [personalOpen, setPersonalOpen] = useState(true);
+  const [professionalOpen, setProfessioanalOpen] = useState(false);
+  const [educationalOpen, setEducationalOpen] = useState(false);
+  const id = title.split(" ")[0];
+
+  function dropDown(e) {
+    const sibiling = e.currentTarget.previousElementSibling.textContent;
+    console.log(sibiling);
+    if (sibiling === "Personal Details") {
+      setPersonalOpen((prev) => !prev);
+    } else if (sibiling === "Educational Qualification") {
+      setEducationalOpen((prev) => !prev);
+    } else if (sibiling === "Professional Experience") {
+      setProfessioanalOpen((prev) => !prev);
+    }
+  }
+  const isVisible =
+    (title === "Personal Details" && personalOpen) ||
+    (title === "Educational Qualification" && educationalOpen) ||
+    (title === "Professional Experience" && professionalOpen);
+
   return (
     <section className="user-input-sect">
       <div className="header-section">
         <h2>{title}</h2>
-        <button type="button">
-          <IoIosArrowDown />
+        <button type="button" onClick={dropDown}>
+          {isVisible ? <IoIosArrowDown /> : <IoIosArrowUp />}
         </button>
       </div>
-      <form>
-        {section.map((item) => {
-          return (
-            <div key={item.id} className="input-field">
-              <label htmlFor={item.id}>{item.label}</label>
-              <input type="text" id={item.id} onChange={onChange} />
-            </div>
-          );
-        })}
-        <div className="button-container">
-          <button type="button" onClick={onClick}>
-            Save
-          </button>
-          <button type="button" onClick={onClick}>
-            Reset
-          </button>
-        </div>
-      </form>
+      {isVisible && (
+        <form>
+          {section.map((item) => {
+            return (
+              <div key={item.id} className="input-field">
+                <label htmlFor={item.id}>{item.label}</label>
+                <input type="text" id={item.id} onChange={onChange} />
+              </div>
+            );
+          })}
+
+          <div className="button-container">
+            <button type="button" id={`${id}-save`} onClick={onClick}>
+              Save
+            </button>
+            <button type="button" id={`${id}-edit`} onClick={onClick}>
+              Reset
+            </button>
+          </div>
+        </form>
+      )}
     </section>
   );
 }
